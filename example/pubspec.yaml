@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   neonpen:
-    path: ../../
+    path: ../
 
   cupertino_icons: ^1.0.0
 

@@ -1,3 +1,6 @@
+## [2.0.2] 
+* fix example package path error
+
 ## [2.0.1] 
 * Add comments
 * Changed Example location
