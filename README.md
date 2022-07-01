@@ -6,8 +6,7 @@ When it is built, list item is shown by sliding and bouncing.
 
 
 # Preview
-![Screen Recording 2021-11-29 at 11 12 09 PM (2)](https://user-images.githubusercontent.com/24351423/143973177-3c01bef5-82f2-4e7f-b14a-867292841b64.gif)![Screen Recording 2021-11-30 at 11 11 26 AM](https://user-images.githubusercontent.com/24351423/143973378-bfffa7e9-07be-4625-851e-36b9324f9576.gif)
-
+<img src="https://user-images.githubusercontent.com/24351423/176856029-1df732e2-8e93-4a38-b98d-6d416ca450a6.png" width="300">
 
 
 
@@ -15,10 +14,10 @@ When it is built, list item is shown by sliding and bouncing.
 
 # Installation
 
-Add `animation_list: ^2.1.0` to your `pubspec.yaml` dependecies. And import it:
+Add `neonpen: ^1.0.0` to your `pubspec.yaml` dependecies. And import it:
 
 ```
-import 'package:animation_list/animation_list.dart';
+import 'package:neonpen/neonpen.dart';
 ```
 <br>
 
@@ -26,82 +25,212 @@ import 'package:animation_list/animation_list.dart';
 Simply add a Animation List widget with required params.
 
 ```
-final List<Map<String, dynamic>> data = [
-    {
-      'title': '1111',
-      'backgroundColor': Colors.grey,
-    },
-    {
-      'title': '2222',
-      'backgroundColor': Colors.red,
-    },
-    {
-      'title': '3333',
-      'backgroundColor': Colors.yellow,
-    },
-    {
-      'title': '4444',
-      'backgroundColor': Colors.blue,
-    },
-    {
-      'title': '5555',
-      'backgroundColor': Colors.green,
-    },
-    {
-      'title': '6666',
-      'backgroundColor': Colors.orange,
-    },
-    {
-      'title': '7777',
-      'backgroundColor': Colors.brown,
-    },
-    {
-      'title': '8888',
-      'backgroundColor': Colors.purple,
-    },
-  ];
-
-  Widget _buildTile(String title, Color backgroundColor) {
-    return Container(
-        height: 100,
-        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(25)),
-          color: backgroundColor,
-        ));
-  }
-
-  @override
-  Widget build(BuildContext context) {
+Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
       body: Center(
-        child: AnimationList(
-            children: data.map((item) {
-              return _buildTile(item['title'], item['backgroundColor']);
-            }).toList()),
-            duration: 1000,
-            reBounceDepth: 10.0,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Neonpen(
+              text: Text(
+                'Hello World!',
+                style: TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+              color: Colors.red,
+              opacity: 0.3,
+              emphasisWidth: 5,
+              emphasisOpacity: 0.3,
+              emphasisAngleDegree: 0.5,
+              enableLineZiggle: true,
+              lineZiggleLevel: 0,
+              isDoubleLayer: false,
+            ),
+            SizedBox(height: 30),
+            Neonpen(
+              text: Text(
+                'Hello World!',
+                style: TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+              color: Colors.yellow,
+              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+              opacity: 0.3,
+              emphasisWidth: 5,
+              emphasisOpacity: 0.3,
+              emphasisAngleDegree: 0.5,
+              enableLineZiggle: true,
+              lineZiggleLevel: 1,
+              isDoubleLayer: false,
+            ),
+            SizedBox(height: 30),
+            Neonpen(
+              text: Text(
+                'Hello World!',
+                style: TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+              color: Colors.orange,
+              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+              opacity: 0.3,
+              emphasisWidth: 5,
+              emphasisOpacity: 0.3,
+              emphasisAngleDegree: 0.5,
+              enableLineZiggle: true,
+              lineZiggleLevel: 1,
+              isDoubleLayer: false,
+            ),
+            SizedBox(height: 30),
+            Neonpen(
+              text: Text(
+                'Hello World!',
+                style: TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+              color: Colors.grey,
+              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+              opacity: 0.7,
+              emphasisWidth: 5,
+              emphasisOpacity: 0.5,
+              emphasisAngleDegree: 0.5,
+              enableLineZiggle: true,
+              lineZiggleLevel: 1,
+              isDoubleLayer: false,
+            ),
+            SizedBox(height: 30),
+            Neonpen(
+              text: Text(
+                'Hello World!',
+                style: TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+              color: Colors.blue,
+              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+              opacity: 0.3,
+              emphasisWidth: 10,
+              emphasisOpacity: 0.3,
+              emphasisAngleDegree: 2,
+              enableLineZiggle: true,
+              lineZiggleLevel: 1,
+              isDoubleLayer: false,
+            ),
+            SizedBox(height: 30),
+            Neonpen(
+              text: Text(
+                'Hello World!',
+                style: TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+              color: Colors.purple,
+              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+              opacity: 0.3,
+              emphasisWidth: 10,
+              emphasisOpacity: 0.3,
+              emphasisAngleDegree: 2,
+              enableLineZiggle: true,
+              lineZiggleLevel: 2,
+              isDoubleLayer: false,
+            ),
+            SizedBox(height: 30),
+            Neonpen(
+              text: Text(
+                'Hello World!',
+                style: TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+              color: Colors.green,
+              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+              opacity: 0.3,
+              emphasisWidth: 5,
+              emphasisOpacity: 0.3,
+              emphasisAngleDegree: 0.5,
+              enableLineZiggle: true,
+              lineZiggleLevel: 1,
+              isDoubleLayer: true,
+            ),
+            SizedBox(height: 30),
+            Neonpen(
+              text: Text(
+                'Hello World!',
+                style: TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+              color: Colors.lime,
+              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+              opacity: 0.3,
+              emphasisWidth: 5,
+              emphasisOpacity: 0.3,
+              emphasisAngleDegree: 2,
+              enableLineZiggle: true,
+              lineZiggleLevel: 1,
+              isDoubleLayer: true,
+            ),
+            SizedBox(height: 30),
+            Neonpen(
+              text: Text(
+                'Hello World!',
+                style: TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+              color: Colors.amber,
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+              opacity: 0.3,
+              emphasisWidth: 5,
+              emphasisOpacity: 0.3,
+              emphasisAngleDegree: 0.5,
+              enableLineZiggle: true,
+              lineZiggleLevel: 1,
+              isDoubleLayer: true,
+            ),
+            SizedBox(height: 30),
+            Neonpen(
+              text: Text(
+                'Hello World!',
+                style: TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+              color: Colors.indigo,
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+              opacity: 0.3,
+              emphasisWidth: 8,
+              emphasisOpacity: 0.1,
+              emphasisAngleDegree: 0.8,
+              enableLineZiggle: true,
+              lineZiggleLevel: 1,
+              isDoubleLayer: true,
+            ),
+            SizedBox(height: 30),
+          ],
+        ),
       ),
     );
-  }
+}
 ```
 <br>
 
 # Properties
 | Attribute | Data type | Description | Default |
 |--|--|--|--|
-| key | Key | Controls how one widget replaces another widget in the tree | - |
-| controller | ScrollController | An object that can be used to control the position to which this scroll view is scrolled | - |
-| primary | bool | Whether this is the primary scroll view associated with the parent PrimaryScrollController | - |
-| physics | ScrollPhysics | How the scroll view should respond to user input | - |
-| shrinkWrap | bool | Whether the extent of the scroll view in the scrollDirection should be determined by the contents being viewed | false |
-| padding | EdgeInsetsGeometry | The amount of space by which to inset the children | - |
-| cacheExtent | double | The viewport has an area before and after the visible area to cache items that are about to become visible when the user scrolls | - |
-| children | List<Widget> | The children are required to fill the ListView | <Widget>[] |
-| semanticChildCount | int | The number of children that will contribute semantic information | - |
-| dragStartBehavior | DragStartBehavior | Determines the way that drag start behavior is handled | DragStartBehavior.start |
-| keyboardDismissBehavior | Key | ScrollViewKeyboardDismissBehavior the defines how this ScrollView will dismiss the keyboard automatically | ScrollViewKeyboardDismissBehavior.manual |
-| restorationId | String | Restoration ID to save and restore the scroll offset of the scrollable | - |
-| clipBehavior | Clip | The content will be clipped (or not) according to this option | Clip.hardEdge |
-| duration | int | The milliseconds the animation runs  | 1300 |
-| reBounceDepth | double | A value of bounce depth | 10.0 |
+| text | Text | A Text widget that will be covered by neonpen effect | - |
+| color | Color | A color of neonpen style | - |
+| opacity | double | An opacity of neonpen style | 0.5 |
+| padding | EdgeInsets | A padding of between Text widget and neonpen style | EdgeInsets.symmetric(horizontal: 5) |
+| emphasisWidth | double | The start and end's neonpen style thickness | 5.0 |
+| emphasisOpacity | double | An opacity of the start and end's neonpen style | 0.55 |
+| emphasisAngleDegree | double | An angle degree of the start and end's neonpen style | 1 |
+| enableLineZiggle | bool | Add a ziggle style to neonpen line | false |
+| lineZiggleLevel | double | A level of ziggle style to neonpen line | 1 |
+| isDoubleLayer | bool | Add a two neopen style on Text widget | false |
