@@ -41,31 +41,26 @@ class _NeonpenState extends State<Neonpen> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        WidgetSize(
-          onChange: (Size size) {
-            textWidgetSize = size;
-            setState(() {});
-          },
-          child: widget.text,
-        ),
-        CustomPaint(
-          painter: NeonPainter(
-            width: textWidgetSize.width,
-            height: textWidgetSize.height,
-            color: widget.color,
-            padding: widget.padding,
-            opacity: widget.opacity,
-            emphasisWidth: widget.emphasisWidth,
-            emphasisOpacity: widget.emphasisOpacity,
-            emphasisAngleDegree: widget.emphasisAngleDegree,
-            enableLineZiggle: widget.enableLineZiggle,
-            lineZiggleLevel: widget.lineZiggleLevel,
-            isDoubleLayer: widget.isDoubleLayer,
-          ),
-        )
-      ],
+    return CustomPaint(
+      size: textWidgetSize,
+      foregroundPainter: NeonPainter(
+        color: widget.color,
+        padding: widget.padding,
+        opacity: widget.opacity,
+        emphasisWidth: widget.emphasisWidth,
+        emphasisOpacity: widget.emphasisOpacity,
+        emphasisAngleDegree: widget.emphasisAngleDegree,
+        enableLineZiggle: widget.enableLineZiggle,
+        lineZiggleLevel: widget.lineZiggleLevel,
+        isDoubleLayer: widget.isDoubleLayer,
+      ),
+      child: WidgetSize(
+        onChange: (Size size) {
+          textWidgetSize = size;
+          setState(() {});
+        },
+        child: widget.text,
+      ),
     );
   }
 }
@@ -73,8 +68,6 @@ class _NeonpenState extends State<Neonpen> {
 // A NeonPainter class for draw neon pen style
 
 class NeonPainter extends CustomPainter {
-  final double width;
-  final double height;
   final double opacity;
   final Color color;
   final EdgeInsets padding;
@@ -88,8 +81,6 @@ class NeonPainter extends CustomPainter {
   final _random = Random();
 
   NeonPainter({
-    required double width,
-    required double height,
     required Color color,
     double? opacity,
     EdgeInsets? padding,
@@ -99,9 +90,7 @@ class NeonPainter extends CustomPainter {
     bool? enableLineZiggle,
     double? lineZiggleLevel,
     bool? isDoubleLayer,
-  })  : this.width = width,
-        this.height = height,
-        this.opacity = opacity ?? 0.5,
+  })  : this.opacity = opacity ?? 0.5,
         this.color = color,
         this.padding = padding ?? EdgeInsets.symmetric(horizontal: 5),
         this.emphasisWidth = emphasisWidth ?? 5.0,
@@ -114,9 +103,9 @@ class NeonPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final double startX = 0 - padding.left;
-    final double endX = width + padding.right;
+    final double endX = size.width + padding.right;
     final double startY = 0 - padding.top;
-    final double endY = height + padding.bottom;
+    final double endY = size.height + padding.bottom;
 
     if (isDoubleLayer == false) {
       // If widget has a one layer, just draw full size neonpen style
@@ -135,12 +124,12 @@ class NeonPainter extends CustomPainter {
         x: startX,
         y: startY,
         width: endX,
-        height: height * 2 / 3 + padding.bottom * 3 / 4,
+        height: size.height * 2 / 3 + padding.bottom * 3 / 4,
       );
       drawNeonpen(
         canvas: canvas,
         x: startX + 5,
-        y: height * 2 / 3 - padding.bottom * 3 / 4,
+        y: size.height * 2 / 3 - padding.bottom * 3 / 4,
         width: endX + 5,
         height: endY,
       );
