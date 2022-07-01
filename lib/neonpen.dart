@@ -6,21 +6,22 @@ import 'package:flutter/material.dart';
 
 import 'util/widget_size.dart';
 
+// A Widget that give a neon pen style to Text widget
 class Neonpen extends StatefulWidget {
   final Text text;
   final Color color;
-  final double? opacity;
-  final EdgeInsets? padding;
-  final double? emphasisWidth;
-  final double? emphasisOpacity;
-  final double? emphasisAngleDegree;
-  final bool? enableLineZiggle;
-  final double? lineZiggleLevel;
-  final bool? isDoubleLayer;
+  final double opacity;
+  final EdgeInsets padding;
+  final double emphasisWidth;
+  final double emphasisOpacity;
+  final double emphasisAngleDegree;
+  final bool enableLineZiggle;
+  final double lineZiggleLevel;
+  final bool isDoubleLayer;
 
   Neonpen({
-    required this.text,
-    required this.color,
+    @required this.text,
+    @required this.color,
     this.opacity,
     this.padding,
     this.emphasisWidth,
@@ -69,6 +70,8 @@ class _NeonpenState extends State<Neonpen> {
   }
 }
 
+// A NeonPainter class for draw neon pen style
+
 class NeonPainter extends CustomPainter {
   final double width;
   final double height;
@@ -85,17 +88,17 @@ class NeonPainter extends CustomPainter {
   final _random = Random();
 
   NeonPainter({
-    required double width,
-    required double height,
-    required Color color,
-    double? opacity,
-    EdgeInsets? padding,
-    double? emphasisWidth,
-    double? emphasisOpacity,
-    double? emphasisAngleDegree,
-    bool? enableLineZiggle,
-    double? lineZiggleLevel,
-    bool? isDoubleLayer,
+    @required double width,
+    @required double height,
+    @required Color color,
+    double opacity,
+    EdgeInsets padding,
+    double emphasisWidth,
+    double emphasisOpacity,
+    double emphasisAngleDegree,
+    bool enableLineZiggle,
+    double lineZiggleLevel,
+    bool isDoubleLayer,
   })  : this.width = width,
         this.height = height,
         this.opacity = opacity ?? 0.5,
@@ -116,6 +119,7 @@ class NeonPainter extends CustomPainter {
     final double endY = height + padding.bottom;
 
     if (isDoubleLayer == false) {
+      // If widget has a one layer, just draw full size neonpen style
       drawNeonpen(
         canvas: canvas,
         x: startX,
@@ -124,6 +128,8 @@ class NeonPainter extends CustomPainter {
         height: endY,
       );
     } else {
+      // If widget has a double layer, draw one neopen style and
+      // over-draw over first neonpen style layer
       drawNeonpen(
         canvas: canvas,
         x: startX,
@@ -141,10 +147,11 @@ class NeonPainter extends CustomPainter {
     }
   }
 
+  // Draw neonpen at position of x,y and size of height, width.
   void drawNeonpen({
-    required Canvas canvas,
-    required double height,
-    required double width,
+    @required Canvas canvas,
+    @required double height,
+    @required double width,
     double x = 0,
     double y = 0,
   }) {
@@ -154,7 +161,7 @@ class NeonPainter extends CustomPainter {
     final double endY = height;
     final double leftRightDistance = 3.0 * emphasisAngleDegree;
 
-    // Draw main neon line
+    // Draw main neon main line
     Paint paint = Paint()
       ..color = color.withOpacity(opacity)
       ..style = PaintingStyle.fill;
@@ -212,9 +219,15 @@ class NeonPainter extends CustomPainter {
     return true;
   }
 
+  // To get range of random double value
   double doubleInRange(Random source, num start, num end) =>
       source.nextDouble() * (end - start) + start;
 
+  // Make a list of random Offset
+  // startMainAxis : random start value
+  // endMainAxis : radom end value
+  // amount : amount of random Offset value
+  // differenceCrossAxis : gap from crossAxis 0 value
   List<Offset> makeRandomOffset(double startMainAxis, double endMainAxis,
       double startCrossAxis, int amount, double differenceCrossAxis,
       {bool reverse = false}) {

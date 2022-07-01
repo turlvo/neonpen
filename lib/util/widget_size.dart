@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+// To get a specifc Widget's Size
 class WidgetSize extends StatefulWidget {
   final Widget child;
   final Function onChange;
 
   const WidgetSize({
-    Key? key,
-    required this.onChange,
-    required this.child,
+    Key key,
+    @required this.onChange,
+    @required this.child,
   }) : super(key: key);
 
   @override
@@ -28,6 +29,7 @@ class _WidgetSizeState extends State<WidgetSize> {
   var widgetKey = GlobalKey();
   var oldSize;
 
+  // When Widget is built, it is called
   void postFrameCallback(_) {
     var context = widgetKey.currentContext;
     if (context == null) return;
