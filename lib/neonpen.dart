@@ -4,10 +4,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import 'util/widget_size.dart';
-
 // A Widget that give a neon pen style to Text widget
-class Neonpen extends StatefulWidget {
+class Neonpen extends StatelessWidget {
   final Text text;
   final Color color;
   final double opacity;
@@ -33,34 +31,20 @@ class Neonpen extends StatefulWidget {
   });
 
   @override
-  _NeonpenState createState() => _NeonpenState();
-}
-
-class _NeonpenState extends State<Neonpen> {
-  Size textWidgetSize = Size.zero;
-
-  @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      size: textWidgetSize,
       painter: NeonPainter(
-        color: widget.color,
-        padding: widget.padding,
-        opacity: widget.opacity,
-        emphasisWidth: widget.emphasisWidth,
-        emphasisOpacity: widget.emphasisOpacity,
-        emphasisAngleDegree: widget.emphasisAngleDegree,
-        enableLineZiggle: widget.enableLineZiggle,
-        lineZiggleLevel: widget.lineZiggleLevel,
-        isDoubleLayer: widget.isDoubleLayer,
+        color: color,
+        padding: padding,
+        opacity: opacity,
+        emphasisWidth: emphasisWidth,
+        emphasisOpacity: emphasisOpacity,
+        emphasisAngleDegree: emphasisAngleDegree,
+        enableLineZiggle: enableLineZiggle,
+        lineZiggleLevel: lineZiggleLevel,
+        isDoubleLayer: isDoubleLayer,
       ),
-      child: WidgetSize(
-        onChange: (Size size) {
-          textWidgetSize = size;
-          setState(() {});
-        },
-        child: widget.text,
-      ),
+      child: text,
     );
   }
 }

@@ -121,7 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
               color: Colors.blue,
               padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
               opacity: 0.3,
-              emphasisWidth: 10,
+              emphasisWidth: 15,
               emphasisOpacity: 0.3,
               emphasisAngleDegree: 2,
               enableLineZiggle: true,
