@@ -1,6 +1,6 @@
 # Neonpen
 
-A Flutter package to add a Neon Pen effect on text.<br>
+A Flutter package to add a Neon Pen style on text.<br>
 When it is built, list item is shown by sliding and bouncing.
 <br><br>
 
@@ -14,7 +14,7 @@ When it is built, list item is shown by sliding and bouncing.
 
 # Installation
 
-Add `neonpen: ^1.0.0` to your `pubspec.yaml` dependecies. And import it:
+Add `neonpen: ^2.0.0` to your `pubspec.yaml` dependecies. And import it:
 
 ```
 import 'package:neonpen/neonpen.dart';

@@ -1,7 +1,6 @@
 library neonpen;
 
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -10,18 +9,18 @@ import 'util/widget_size.dart';
 class Neonpen extends StatefulWidget {
   final Text text;
   final Color color;
-  final double opacity;
-  final EdgeInsets padding;
-  final double emphasisWidth;
-  final double emphasisOpacity;
-  final double emphasisAngleDegree;
-  final bool enableLineZiggle;
-  final double lineZiggleLevel;
-  final bool isDoubleLayer;
+  final double? opacity;
+  final EdgeInsets? padding;
+  final double? emphasisWidth;
+  final double? emphasisOpacity;
+  final double? emphasisAngleDegree;
+  final bool? enableLineZiggle;
+  final double? lineZiggleLevel;
+  final bool? isDoubleLayer;
 
   Neonpen({
-    @required this.text,
-    @required this.color,
+    required this.text,
+    required this.color,
     this.opacity,
     this.padding,
     this.emphasisWidth,
@@ -46,7 +45,6 @@ class _NeonpenState extends State<Neonpen> {
         WidgetSize(
           onChange: (Size size) {
             textWidgetSize = size;
-            print(size);
             setState(() {});
           },
           child: widget.text,
@@ -87,24 +85,24 @@ class NeonPainter extends CustomPainter {
   final _random = Random();
 
   NeonPainter({
-    @required double width,
-    @required double height,
-    @required Color color,
-    double opacity,
-    EdgeInsets padding,
-    double emphasisWidth,
-    double emphasisOpacity,
-    double emphasisAngleDegree,
-    bool enableLineZiggle,
-    double lineZiggleLevel,
-    bool isDoubleLayer,
+    required double width,
+    required double height,
+    required Color color,
+    double? opacity,
+    EdgeInsets? padding,
+    double? emphasisWidth,
+    double? emphasisOpacity,
+    double? emphasisAngleDegree,
+    bool? enableLineZiggle,
+    double? lineZiggleLevel,
+    bool? isDoubleLayer,
   })  : this.width = width,
         this.height = height,
         this.opacity = opacity ?? 0.5,
         this.color = color,
         this.padding = padding ?? EdgeInsets.symmetric(horizontal: 5),
         this.emphasisWidth = emphasisWidth ?? 5.0,
-        this.emphasisOpacity = emphasisOpacity ?? (opacity + 0.05),
+        this.emphasisOpacity = emphasisOpacity ?? (opacity ?? 0.5 + 0.05),
         this.emphasisAngleDegree = emphasisAngleDegree ?? 1,
         this.enableLineZiggle = enableLineZiggle ?? false,
         this.lineZiggleLevel = lineZiggleLevel ?? 1,
@@ -144,11 +142,11 @@ class NeonPainter extends CustomPainter {
   }
 
   void drawNeonpen({
-    @required Canvas canvas,
+    required Canvas canvas,
+    required double height,
+    required double width,
     double x = 0,
     double y = 0,
-    @required double height,
-    @required double width,
   }) {
     final double startX = x;
     final double endX = width;
