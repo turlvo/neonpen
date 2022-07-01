@@ -14,9 +14,9 @@ class Neonpen extends StatefulWidget {
   final EdgeInsets padding;
   final double emphasisWidth;
   final double emphasisOpacity;
-  final double emphasisDegree;
+  final double emphasisAngleDegree;
   final bool enableLineZiggle;
-  final int lineZiggleDegree;
+  final double lineZiggleLevel;
   final bool isDoubleLayer;
 
   Neonpen({
@@ -26,9 +26,9 @@ class Neonpen extends StatefulWidget {
     this.padding,
     this.emphasisWidth,
     this.emphasisOpacity,
-    this.emphasisDegree,
+    this.emphasisAngleDegree,
     this.enableLineZiggle,
-    this.lineZiggleDegree,
+    this.lineZiggleLevel,
     this.isDoubleLayer,
   });
 
@@ -60,9 +60,9 @@ class _NeonpenState extends State<Neonpen> {
             opacity: widget.opacity,
             emphasisWidth: widget.emphasisWidth,
             emphasisOpacity: widget.emphasisOpacity,
-            emphasisDegree: widget.emphasisDegree,
+            emphasisAngleDegree: widget.emphasisAngleDegree,
             enableLineZiggle: widget.enableLineZiggle,
-            lineZiggleDegree: widget.lineZiggleDegree,
+            lineZiggleLevel: widget.lineZiggleLevel,
             isDoubleLayer: widget.isDoubleLayer,
           ),
         )
@@ -79,9 +79,9 @@ class NeonPainter extends CustomPainter {
   final EdgeInsets padding;
   final double emphasisWidth;
   final double emphasisOpacity;
-  final double emphasisDegree;
+  final double emphasisAngleDegree;
   final bool enableLineZiggle;
-  final int lineZiggleDegree;
+  final double lineZiggleLevel;
   final bool isDoubleLayer;
 
   final _random = Random();
@@ -89,25 +89,25 @@ class NeonPainter extends CustomPainter {
   NeonPainter({
     @required double width,
     @required double height,
+    @required Color color,
     double opacity,
-    Color color,
     EdgeInsets padding,
     double emphasisWidth,
     double emphasisOpacity,
-    double emphasisDegree,
+    double emphasisAngleDegree,
     bool enableLineZiggle,
-    int lineZiggleDegree,
+    double lineZiggleLevel,
     bool isDoubleLayer,
   })  : this.width = width,
         this.height = height,
         this.opacity = opacity ?? 0.5,
-        this.color = color ?? Colors.red,
+        this.color = color,
         this.padding = padding ?? EdgeInsets.symmetric(horizontal: 5),
-        this.emphasisWidth = emphasisWidth ?? 5,
+        this.emphasisWidth = emphasisWidth ?? 5.0,
         this.emphasisOpacity = emphasisOpacity ?? (opacity + 0.05),
-        this.emphasisDegree = emphasisDegree ?? 1,
+        this.emphasisAngleDegree = emphasisAngleDegree ?? 1,
         this.enableLineZiggle = enableLineZiggle ?? false,
-        this.lineZiggleDegree = lineZiggleDegree ?? 1,
+        this.lineZiggleLevel = lineZiggleLevel ?? 1,
         this.isDoubleLayer = isDoubleLayer ?? false;
 
   @override
@@ -154,7 +154,7 @@ class NeonPainter extends CustomPainter {
     final double endX = width;
     final double startY = y;
     final double endY = height;
-    final double leftRightDistance = 3.0 * emphasisDegree;
+    final double leftRightDistance = 3.0 * emphasisAngleDegree;
 
     // Draw main neon line
     Paint paint = Paint()
@@ -165,8 +165,8 @@ class NeonPainter extends CustomPainter {
     path.addPolygon([
       Offset(startX, startY),
       if (enableLineZiggle)
-        ...makeRandomOffset(startX, endX, startY, 50 * lineZiggleDegree,
-            0.3 * lineZiggleDegree),
+        ...makeRandomOffset(startX, endX, startY, 50 * lineZiggleLevel.toInt(),
+            0.3 * lineZiggleLevel),
       Offset(endX, startY),
       Offset(endX - leftRightDistance, endY),
       if (enableLineZiggle)
@@ -174,8 +174,8 @@ class NeonPainter extends CustomPainter {
             startX - leftRightDistance,
             endX - leftRightDistance,
             endY,
-            50 * lineZiggleDegree,
-            0.3 * lineZiggleDegree,
+            50 * lineZiggleLevel.toInt(),
+            0.3 * lineZiggleLevel,
             reverse: true),
       Offset(startX - leftRightDistance, endY),
     ], true);
