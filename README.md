@@ -14,7 +14,7 @@ There are options for color, opacity, ziggle, double layer and so on.
 
 # Installation
 
-Add `neonpen: ^2.0.1` to your `pubspec.yaml` dependecies. And import it:
+Add `neonpen: ^2.0.4` to your `pubspec.yaml` dependecies. And import it:
 
 ```
 import 'package:neonpen/neonpen.dart';

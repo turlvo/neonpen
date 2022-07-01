@@ -1,6 +1,6 @@
 name: neonpen
 description: A Flutter package to add a Neon Pen style on text.
-version: 2.0.2
+version: 2.0.4
 homepage: https://github.com/turlvo/neonpen
 
 environment:

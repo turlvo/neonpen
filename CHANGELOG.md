@@ -1,3 +1,8 @@
+## [2.0.4] 
+* Changed from StatefulWidget to StatelessWidget
+* Changed emphasis line style
+* Refactoring structure
+
 ## [2.0.2] 
 * fix example package path error
 
