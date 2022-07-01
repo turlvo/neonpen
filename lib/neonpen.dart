@@ -179,20 +179,21 @@ class NeonPainter extends CustomPainter {
     Paint emphasisPaint = Paint()
       ..color = color.withOpacity(emphasisOpacity)
       ..style = PaintingStyle.stroke
-      ..strokeWidth = emphasisWidth;
+      ..strokeWidth = emphasisWidth
+      ..strokeCap = StrokeCap.round;
 
     Path leftEmphasisPath = Path();
-    leftEmphasisPath.moveTo(startX + (emphasisWidth / 2), startY);
-    leftEmphasisPath.lineTo(
-        startX + (emphasisWidth / 2) - leftRightDistance, endY);
+    leftEmphasisPath.moveTo(
+        startX + (emphasisWidth / 2), startY + (emphasisWidth / 2));
+    leftEmphasisPath.lineTo(startX + (emphasisWidth / 2) - leftRightDistance,
+        endY - (emphasisWidth / 2));
+    canvas.drawPath(leftEmphasisPath, emphasisPaint);
 
     Path rightEmphasisPath = Path();
-    rightEmphasisPath.moveTo(endX - (emphasisWidth / 2), startY);
-    rightEmphasisPath.lineTo(
-        endX - (emphasisWidth / 2) - leftRightDistance, endY);
-
-    leftEmphasisPath.addPath(rightEmphasisPath, Offset.zero);
-    leftEmphasisPath.close();
+    rightEmphasisPath.moveTo(
+        endX - (emphasisWidth / 2), startY + (emphasisWidth / 2));
+    rightEmphasisPath.lineTo(endX - (emphasisWidth / 2) - leftRightDistance,
+        endY - (emphasisWidth / 2));
 
     canvas.drawPath(leftEmphasisPath, emphasisPaint);
   }
