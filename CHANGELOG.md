@@ -1,3 +1,6 @@
+## [1.0.5] 
+* Added disableEmphasis property to disable emphasis effect
+
 ## [1.0.4] 
 * Changed from StatefulWidget to StatelessWidget
 
