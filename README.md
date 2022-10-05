@@ -6,10 +6,7 @@ There are options for color, opacity, ziggle, double layer and so on.
 
 
 # Preview
-<img src="https://user-images.githubusercontent.com/24351423/176856029-1df732e2-8e93-4a38-b98d-6d416ca450a6.png" width="300">
-
-
-
+<img src="https://user-images.githubusercontent.com/24351423/176984960-efb75718-8f3c-4333-b72a-272382d38d91.png" width="300">
 
 
 # Installation
