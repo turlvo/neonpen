@@ -6,7 +6,7 @@ There are options for color, opacity, ziggle, double layer and so on.
 
 
 # Preview
-<img src="https://user-images.githubusercontent.com/24351423/176984960-efb75718-8f3c-4333-b72a-272382d38d91.png" width="300">
+<img src="https://user-images.githubusercontent.com/24351423/194112767-75e38b5b-87c5-4834-b177-4ffaa75dab76.png" width="300">
 
 
 
