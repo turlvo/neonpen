@@ -1,3 +1,6 @@
+## [2.0.5] 
+* Added disableEmphasis property to disable emphasis effect
+
 ## [2.0.4] 
 * Changed from StatefulWidget to StatelessWidget
 * Changed emphasis line style

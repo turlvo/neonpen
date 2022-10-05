@@ -12,7 +12,7 @@ There are options for color, opacity, ziggle, double layer and so on.
 
 # Installation
 
-Add `neonpen: ^2.0.4` to your `pubspec.yaml` dependecies. And import it:
+Add `neonpen: ^2.0.5` to your `pubspec.yaml` dependecies. And import it:
 
 ```
 import 'package:neonpen/neonpen.dart';
@@ -59,10 +59,7 @@ Widget build(BuildContext context) {
               color: Colors.yellow,
               padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
               opacity: 0.3,
-              emphasisWidth: 5,
-              emphasisOpacity: 0.3,
-              emphasisAngleDegree: 0.5,
-              enableLineZiggle: true,
+              disableEmphasis: true,
               lineZiggleLevel: 1,
               isDoubleLayer: false,
             ),
@@ -75,11 +72,13 @@ Widget build(BuildContext context) {
                 ),
               ),
               color: Colors.orange,
-              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+              padding: EdgeInsets.only(
+                top: -10,
+                left: 5,
+                right: 5,
+              ),
               opacity: 0.3,
-              emphasisWidth: 5,
-              emphasisOpacity: 0.3,
-              emphasisAngleDegree: 0.5,
+              disableEmphasis: true,
               enableLineZiggle: true,
               lineZiggleLevel: 1,
               isDoubleLayer: false,
@@ -113,7 +112,7 @@ Widget build(BuildContext context) {
               color: Colors.blue,
               padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
               opacity: 0.3,
-              emphasisWidth: 10,
+              emphasisWidth: 15,
               emphasisOpacity: 0.3,
               emphasisAngleDegree: 2,
               enableLineZiggle: true,
@@ -226,6 +225,7 @@ Widget build(BuildContext context) {
 | color | Color | A color of neonpen style | - |
 | opacity | double | An opacity of neonpen style | 0.5 |
 | padding | EdgeInsets | A padding of between Text widget and neonpen style | EdgeInsets.symmetric(horizontal: 5) |
+| disableEmphasis | bool | A bool value to disable emphasis effect | false |
 | emphasisWidth | double | The start and end's neonpen style thickness | 5.0 |
 | emphasisOpacity | double | An opacity of the start and end's neonpen style | 0.55 |
 | emphasisAngleDegree | double | An angle degree of the start and end's neonpen style | 1 |

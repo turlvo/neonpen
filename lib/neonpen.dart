@@ -10,6 +10,7 @@ class Neonpen extends StatelessWidget {
   final Color color;
   final double? opacity;
   final EdgeInsets? padding;
+  final bool? disableEmphasis;
   final double? emphasisWidth;
   final double? emphasisOpacity;
   final double? emphasisAngleDegree;
@@ -22,6 +23,7 @@ class Neonpen extends StatelessWidget {
     required this.color,
     this.opacity,
     this.padding,
+    this.disableEmphasis,
     this.emphasisWidth,
     this.emphasisOpacity,
     this.emphasisAngleDegree,
@@ -37,6 +39,7 @@ class Neonpen extends StatelessWidget {
         color: color,
         padding: padding,
         opacity: opacity,
+        disableEmphasis: disableEmphasis,
         emphasisWidth: emphasisWidth,
         emphasisOpacity: emphasisOpacity,
         emphasisAngleDegree: emphasisAngleDegree,
@@ -54,6 +57,7 @@ class NeonPainter extends CustomPainter {
   final double opacity;
   final Color color;
   final EdgeInsets padding;
+  final bool disableEmphasis;
   final double emphasisWidth;
   final double emphasisOpacity;
   final double emphasisAngleDegree;
@@ -67,6 +71,7 @@ class NeonPainter extends CustomPainter {
     required Color color,
     double? opacity,
     EdgeInsets? padding,
+    bool? disableEmphasis,
     double? emphasisWidth,
     double? emphasisOpacity,
     double? emphasisAngleDegree,
@@ -76,6 +81,7 @@ class NeonPainter extends CustomPainter {
   })  : this.opacity = opacity ?? 0.5,
         this.color = color,
         this.padding = padding ?? EdgeInsets.symmetric(horizontal: 5),
+        this.disableEmphasis = disableEmphasis ?? false,
         this.emphasisWidth = emphasisWidth ?? 5.0,
         this.emphasisOpacity = emphasisOpacity ?? (opacity ?? 0.5 + 0.05),
         this.emphasisAngleDegree = emphasisAngleDegree ?? 1,
@@ -142,16 +148,11 @@ class NeonPainter extends CustomPainter {
     path.addPolygon([
       Offset(startX, startY),
       if (enableLineZiggle)
-        ...makeRandomOffset(startX, endX, startY, 50 * lineZiggleLevel.toInt(),
-            0.3 * lineZiggleLevel),
+        ...makeRandomOffset(startX, endX, startY, 50 * lineZiggleLevel.toInt(), 0.3 * lineZiggleLevel),
       Offset(endX, startY),
       Offset(endX - leftRightDistance, endY),
       if (enableLineZiggle)
-        ...makeRandomOffset(
-            startX - leftRightDistance,
-            endX - leftRightDistance,
-            endY,
-            50 * lineZiggleLevel.toInt(),
+        ...makeRandomOffset(startX - leftRightDistance, endX - leftRightDistance, endY, 50 * lineZiggleLevel.toInt(),
             0.3 * lineZiggleLevel,
             reverse: true),
       Offset(startX - leftRightDistance, endY),
@@ -159,26 +160,24 @@ class NeonPainter extends CustomPainter {
     canvas.drawPath(path, paint);
 
     // Draw left, right emphasis line
-    Paint emphasisPaint = Paint()
-      ..color = color.withOpacity(emphasisOpacity)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = emphasisWidth
-      ..strokeCap = StrokeCap.round;
+    if (!disableEmphasis) {
+      Paint emphasisPaint = Paint()
+        ..color = color.withOpacity(emphasisOpacity)
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = emphasisWidth
+        ..strokeCap = StrokeCap.round;
 
-    Path leftEmphasisPath = Path();
-    leftEmphasisPath.moveTo(
-        startX + (emphasisWidth / 2), startY + (emphasisWidth / 2));
-    leftEmphasisPath.lineTo(startX + (emphasisWidth / 2) - leftRightDistance,
-        endY - (emphasisWidth / 2));
-    canvas.drawPath(leftEmphasisPath, emphasisPaint);
+      Path leftEmphasisPath = Path();
+      leftEmphasisPath.moveTo(startX + (emphasisWidth / 2), startY + (emphasisWidth / 2));
+      leftEmphasisPath.lineTo(startX + (emphasisWidth / 2) - leftRightDistance, endY - (emphasisWidth / 2));
+      canvas.drawPath(leftEmphasisPath, emphasisPaint);
 
-    Path rightEmphasisPath = Path();
-    rightEmphasisPath.moveTo(
-        endX - (emphasisWidth / 2), startY + (emphasisWidth / 2));
-    rightEmphasisPath.lineTo(endX - (emphasisWidth / 2) - leftRightDistance,
-        endY - (emphasisWidth / 2));
+      Path rightEmphasisPath = Path();
+      rightEmphasisPath.moveTo(endX - (emphasisWidth / 2), startY + (emphasisWidth / 2));
+      rightEmphasisPath.lineTo(endX - (emphasisWidth / 2) - leftRightDistance, endY - (emphasisWidth / 2));
 
-    canvas.drawPath(rightEmphasisPath, emphasisPaint);
+      canvas.drawPath(rightEmphasisPath, emphasisPaint);
+    }
   }
 
   @override
@@ -193,29 +192,25 @@ class NeonPainter extends CustomPainter {
   }
 
   // To get range of random double value
-  double doubleInRange(Random source, num start, num end) =>
-      source.nextDouble() * (end - start) + start;
+  double doubleInRange(Random source, num start, num end) => source.nextDouble() * (end - start) + start;
 
   // Make a list of random Offset
   // startMainAxis : random start value
   // endMainAxis : radom end value
   // amount : amount of random Offset value
   // differenceCrossAxis : gap from crossAxis 0 value
-  List<Offset> makeRandomOffset(double startMainAxis, double endMainAxis,
-      double startCrossAxis, int amount, double differenceCrossAxis,
+  List<Offset> makeRandomOffset(
+      double startMainAxis, double endMainAxis, double startCrossAxis, int amount, double differenceCrossAxis,
       {bool reverse = false}) {
     List<Offset> differeceOffsets = [];
 
     for (int loop = 0; loop < amount; loop++) {
       double _x = _random.nextDouble() * (endMainAxis - startMainAxis);
-      double _y = startCrossAxis +
-          (_random.nextBool() ? -1 : 1) *
-              doubleInRange(_random, 0, differenceCrossAxis);
+      double _y = startCrossAxis + (_random.nextBool() ? -1 : 1) * doubleInRange(_random, 0, differenceCrossAxis);
       differeceOffsets.add(Offset(startMainAxis + _x, _y));
     }
 
-    differeceOffsets
-        .sort((a, b) => reverse ? b.dx.compareTo(a.dx) : a.dx.compareTo(b.dx));
+    differeceOffsets.sort((a, b) => reverse ? b.dx.compareTo(a.dx) : a.dx.compareTo(b.dx));
 
     return differeceOffsets;
   }
